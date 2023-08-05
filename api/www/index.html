@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <!-- I <3 dark mode -->
+  <table class="table table-dark table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in constituents %}
+        <tr>
+          <th scope="row">{{ loop.index }}</th>
+          <!-- TODO: Convert all uppercase values to TitleCase for display -->
+          <td>{{ c.first_name }}</td>
+          <td>{{ c.last_name }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.city }}</td>
+          <td>{{ c.state }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
