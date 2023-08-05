@@ -24,6 +24,7 @@ def create_app() -> Starlette:
     all_routes = [
         # TODO: API versioning, e.g. /api/v1/...
         Route("/health", endpoints.Health),
+        Route("/", endpoints.Index),
         Route("/constituents", endpoints.ConstituentList),
     ]
 

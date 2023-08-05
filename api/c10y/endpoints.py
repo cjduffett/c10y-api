@@ -1,8 +1,10 @@
 """Constituency API endpoints."""
 
+from pathlib import Path
+
 from starlette.endpoints import HTTPEndpoint
 from starlette.requests import Request
-from starlette.responses import PlainTextResponse, JSONResponse
+from starlette.responses import PlainTextResponse, JSONResponse, HTMLResponse
 
 from . import services
 
@@ -14,6 +16,17 @@ class Health(HTTPEndpoint):
         """Check server health/readiness."""
 
         return PlainTextResponse("OK")
+
+
+class Index(HTTPEndpoint):
+    """Index view that displays a list of constituents."""
+
+    async def get(self, request: Request):
+        """Load main index.html page."""
+
+        index_html = Path("www/index.html").read_text()
+
+        return HTMLResponse(index_html)
 
 
 class ConstituentList(HTTPEndpoint):
