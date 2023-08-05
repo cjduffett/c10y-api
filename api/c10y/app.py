@@ -13,10 +13,12 @@ def create_app() -> Starlette:
 
     # Populate database from CSVs
     print("Loading constituent data CSVs...")
+    
     existing_count = load_data.existing_constituents()
     print(f"Loaded {existing_count} existing constituents")
 
-    # TODO: Load and dedupe updates
+    updated_count, dupes = load_data.updated_constituents()
+    print(f"Loaded {updated_count} updated constituents")
 
     # Bind endpoints to application routes
     all_routes = [
