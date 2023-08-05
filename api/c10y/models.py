@@ -1,7 +1,7 @@
 """Database models."""
 
-from sqlalchemy import UniqueConstraint
-from sqlalchemy.orm import DeclarativeBase, Mapped, String, mapped_column
+from sqlalchemy import String, UniqueConstraint
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class BaseModel(DeclarativeBase):
