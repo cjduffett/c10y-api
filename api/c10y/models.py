@@ -40,3 +40,6 @@ class Constituent(BaseModel):
     city: Mapped[str] = mapped_column()
     state: Mapped[str] = mapped_column(String(2))
     zip_code: Mapped[str] = mapped_column(String(5))
+
+    def __repr__(self) -> str:
+        return f"Constituent({self.first_name}, {self.last_name}, {self.email}, {self.zip_code})"
