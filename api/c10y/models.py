@@ -1,5 +1,6 @@
 """Database models."""
 
+from sqlalchemy import UniqueConstraint
 from sqlalchemy.orm import DeclarativeBase, Mapped, String, mapped_column
 
 
@@ -17,12 +18,22 @@ class Constituent(BaseModel):
     """An elected official's constituent."""
 
     __tablename__ = "constituent"
+    
+    # Compound constraint to ensure uniqueness
+    __table_args__ = (
+        # TODO: Consider adding additional fields to this constraint? I picked these fields
+        # since the combination seems "good enough" to ensure uniqueness within a constituency
+        UniqueConstraint("first_name", "last_name", "email", "zip_code"),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True)
-
+    
+    # Store in all uppercase to avoid case sensitivity issues
     first_name: Mapped[str] = mapped_column()
     last_name: Mapped[str] = mapped_column()
-    email: Mapped[str] = mapped_column(unique=True)
+    # TODO: should email be unique? Consider case where two constituents share the same email
+    # address, for example if you have a married couple with a shared family email address
+    email: Mapped[str] = mapped_column()
     phone_number: Mapped[str] = mapped_column(String(12))
     street_address_1: Mapped[str] = mapped_column()
     street_address_2: Mapped[str] = mapped_column(nullable=True)
