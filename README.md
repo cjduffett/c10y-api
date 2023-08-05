@@ -28,6 +28,38 @@ make shell
 
 Application is available at http://localhost:8000
 
+### Index
+
+List of all constituents displayed in a basic table, sorted alphabetically.
+
+![constituent-list](./img/constituent-list.jpg)
+
+### List Constituents
+
+JSON API endpoint returning a list of constituents sorted alphabetically.
+
+Request:
+```
+GET /constituents
+```
+
+Response: `200 OK`
+```json
+{
+  "count": 500,
+  "constituents": [
+    {
+      "first_name": "OLIVER",
+      "last_name": "DOG",
+      "email": "OLLIE@EXAMPLE.COM",
+      "city": "San Luis Obispo",
+      "state": "CA"
+    },
+    ...
+  ]
+}
+```
+
 ### Health Check
 
 Request:
@@ -45,3 +77,4 @@ OK
 * [Poetry](https://python-poetry.org) - Python dependency management
 * [Starlette](https://www.starlette.io) - Fast async Python web framework
 * [Sqlalchemy](https://docs.sqlalchemy.org/en/20/) - Python database ORM
+* [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/) - Server-side template engine
