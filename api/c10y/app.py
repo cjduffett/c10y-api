@@ -3,13 +3,20 @@
 from starlette.applications import Starlette
 from starlette.routing import Route
 
-from . import db, endpoints
+from . import db, endpoints, load_data
 
 
 def create_app() -> Starlette:
     """Initialize application and database."""
     
     db.create_tables()
+
+    # Populate database from CSVs
+    print("Loading constituent data CSVs...")
+    existing_count = load_data.existing_constituents()
+    print(f"Loaded {existing_count} existing constituents")
+
+    # TODO: Load and dedupe updates
 
     # Bind endpoints to application routes
     all_routes = [
