@@ -5,7 +5,7 @@
 </head>
 <body>
   <!-- I <3 dark mode -->
-  <table class="table table-dark">
+  <table class="table table-dark table-striped">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
@@ -17,7 +17,17 @@
       </tr>
     </thead>
     <tbody>
-      <!-- TODO -->
+      {% for c in constituents %}
+        <tr>
+          <th scope="row">{{ loop.index }}</th>
+          <!-- TODO: Convert all uppercase values to TitleCase for display -->
+          <td>{{ c.first_name }}</td>
+          <td>{{ c.last_name }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.city }}</td>
+          <td>{{ c.state }}</td>
+        </tr>
+      {% endfor %}
     </tbody>
   </table>
 </body>

@@ -1,7 +1,6 @@
 """Constituency API endpoints."""
 
-from pathlib import Path
-
+import jinja2
 from starlette.endpoints import HTTPEndpoint
 from starlette.requests import Request
 from starlette.responses import PlainTextResponse, JSONResponse, HTMLResponse
@@ -24,9 +23,12 @@ class Index(HTTPEndpoint):
     async def get(self, request: Request):
         """Load main index.html page."""
 
-        index_html = Path("www/index.html").read_text()
+        jinja_env = _jinja_env()
+        template = jinja_env.get_template("index.html")
 
-        return HTMLResponse(index_html)
+        constituents = services.list_constituents()
+
+        return HTMLResponse(template.render(constituents=constituents))
 
 
 class ConstituentList(HTTPEndpoint):
@@ -57,3 +59,12 @@ class ConstituentList(HTTPEndpoint):
         }
 
         return JSONResponse(response_json)
+
+
+def _jinja_env() -> jinja2.Environment:
+    """Configure Jinja2 HTML template engine."""
+
+    return jinja2.Environment(
+        loader=jinja2.FileSystemLoader("www", encoding="utf-8"),
+        autoescape=jinja2.select_autoescape(),
+    )
