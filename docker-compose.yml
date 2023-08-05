@@ -15,8 +15,9 @@ services:
       # Force the Python stdout and stderr streams to be unbuffered
       - PYTHONUNBUFFERED=1
     volumes:
-      # Mount python source code to minimize need for re-building during development
+      # Mount python and HTML source code to minimize need for re-building during development
       - ./api/c10y:/home/c10y/c10y
+      - ./api/www:/home/c10y/www
 
   # Replaced by a dedicated database server in production (e.g. AWS RDS)
   db:
