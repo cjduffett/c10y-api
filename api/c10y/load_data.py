@@ -62,6 +62,9 @@ def updated_constituents() -> Tuple[int, ConstituentList]:
                 # and error handling so we can weed out malformed data but still update other
                 # fields for the existing record.
                 print(f"Malformed: {constituent}\n{exc._message()}")
+
+        # Commit all updates that didn't cause IntegrityErrors or DataErrors
+        db_session.commit()
             
     return len(updates) - len(dupes), dupes   
 
